@@ -1,15 +1,18 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
 import Navbar from './components/Navbar';
 import Form from './components/Form';
+import useGlobalContext from './hooks/useGlobalContext';
 
 function App() {
-  return (
-    <>
-      <Navbar/>
-      <Form/>
-    </>
-  );
+    const {region, setRegion} = useGlobalContext()
+
+
+    return (
+      <>
+        <Navbar/>
+        {/* form will only load when data is received */}
+        {region && <Form region={region} setRegion={setRegion}/>}
+      </>
+    );
 }
 
 

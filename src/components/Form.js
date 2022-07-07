@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, Input } from '@mui/material';
+import { Button, FormControl } from '@mui/material';
 import { Stack } from '@mui/material';
 // import DatePicker from './DatePicker'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -10,11 +10,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-export default function Form() {
-    const [dateValue, setDateValue] = React.useState(new Date());
+export default function Form({region,timezone,setTimezone}) {
+    const [dateValue, setDateValue] = useState(new Date());
     const [emailContent, setEmailContent] = useState("")
     const [recipientEmail, setRecipientEmail] = useState("")
-    const [timezone, setTimezone] = useState("")
+
 
     return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -57,14 +57,15 @@ export default function Form() {
                     id="demo-simple-select-helper"
                     defaultValue='None'
                     value={timezone}
+                    onChange={(e)=>{setTimezone(e.target.value)}}
                     label="Timezone"
-                    // onSelect={setTimezone((e)=> e.target.value)}
                 >
                     <MenuItem value=""><em>None</em></MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {
+                        region.map((region,index) =><MenuItem key={index} value={region}>{region}</MenuItem>)
+                    }
                 </Select>
+                    {timezone && <p>Current time at {timezone} is: </p>}
             </FormControl>
             <Button type='submit' variant="contained" sx={{width: 500}}>Set Reminder</Button>
 
