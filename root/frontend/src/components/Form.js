@@ -92,8 +92,8 @@ export default function Form() {
                     <Select
                         labelId="demo-simple-select-helper-label"
                         id="demo-simple-select-helper"
-                        defaultValue='Etc/GMT'
-                        value={(timezoneSelection) ? timezoneSelection : 'Etc/GMT'}
+                        defaultValue='ETC/GMT'
+                        value={(timezoneSelection) ? timezoneSelection : 'ETC/GMT'}
                         onChange={selectTimezone}
                         required
                         label="Timezone"
