@@ -6,8 +6,8 @@ const GlobalContext = createContext()
 export const GlobalContextProvider = ({children}) => {
 
     const [region, setRegion] = useState("")
-    const [timezoneSelection, setTimezoneSelection] = useState("")
     const [currentTime, setCurrentTime] = useState("")
+    const [timezoneSelection, setTimezoneSelection] = useState('ETC/GMT')
 
     const selectTimezone = (e)=> {
       setTimezoneSelection(e.target.value)

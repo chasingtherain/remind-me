@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import moment from 'moment';
+import axios from 'axios'
 import TextField from '@mui/material/TextField';
 import { Button, FormControl } from '@mui/material';
 import { Stack } from '@mui/material';
@@ -11,6 +13,7 @@ import Select from '@mui/material/Select';
 import useGlobalContext from '../hooks/useGlobalContext';
 
 
+
 export default function Form() {
     const {currentTime,region,timezoneSelection,selectTimezone} = useGlobalContext()
     const [dateValue, setDateValue] = useState(new Date());
@@ -20,8 +23,8 @@ export default function Form() {
     const [dateError, setDateError] = useState("")
     const [timeError, setTimeError] = useState("")
 
-
     const handleSubmit = (e) => {
+        const url = `${process.env.REACT_APP_BACKENDURL}/postSubmitForm`
         e.preventDefault()
         console.log(dateValue, timeValue);
         if (dateValue === '' || dateValue === undefined) {
@@ -31,11 +34,27 @@ export default function Form() {
         if (timeValue === '' || timeValue === undefined) {
             setTimeError("Time is required!")
         }
-        else 
-        console.log("form submitted")
+
+        const formData = {
+            emailContent: emailContent,
+            recipientEmail: recipientEmail,
+            date: moment(dateValue._d).format("DD MMM YYYY"),
+            time: timeValue._d.getTime(), 
+            timezone: timezoneSelection
+        }
+        console.log("formData: ", formData)
+        axios
+            .post(url, formData)
+            .then((resp)=>{
+                console.log(resp.data)
+            })
+
+
+        console.log("form submitted", formData)
     }
 
     const handleDateSelection = (newValue) => {
+        console.log(newValue)
         setDateValue(newValue)
         setDateError("")
     }
@@ -44,6 +63,11 @@ export default function Form() {
         setTimeValue(newValue)
         setTimeError("")
     }
+
+//   const validateEmail = (email) => {
+//     let regex = /\S+@\S+\.\S+/;
+//     return regex.test(email); // returns true if email is valid
+//   }
 
     return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
