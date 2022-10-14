@@ -8,14 +8,14 @@ import AndroidIcon from '@mui/icons-material/Android';
 
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom:"25px" }}>
       <AppBar position="static">
         <Toolbar>
           <AndroidIcon fontSize='large' sx={{ mr: 2 }}/> 
           <Typography variant="h7" component="div" sx={{ flexGrow: 1 }}>
             REMIND ME
           </Typography>
-          <Button color="inherit" variant="outlined" disabled>Login</Button>
+          {/* <Button color="inherit" variant="outlined" disabled>Login</Button> */}
         </Toolbar>
       </AppBar>
     </Box>

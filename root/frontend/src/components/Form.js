@@ -64,16 +64,11 @@ export default function Form() {
         setTimeError("")
     }
 
-//   const validateEmail = (email) => {
-//     let regex = /\S+@\S+\.\S+/;
-//     return regex.test(email); // returns true if email is valid
-//   }
-
     return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
         <FormControl  sx={{display: "flexbox"}}>
             <form onSubmit={handleSubmit}>
-                <Stack spacing = {3}>
+                <Stack spacing = {4}>
                     <TextField
                         id="outlined-multiline-flexible"
                         label="Email Reminder Content"
